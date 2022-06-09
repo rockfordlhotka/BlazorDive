@@ -40,7 +40,7 @@ app.UseRouting();
 app.MapRazorPages();
 app.MapControllers();
 app.MapBlazorHub();
-app.MapFallbackToFile("index.html");
-//app.MapFallbackToPage("/_Host");
+//app.MapFallbackToFile("index.html"); // wasm
+app.MapFallbackToPage("/_Host");     // ssb
 
 app.Run();
