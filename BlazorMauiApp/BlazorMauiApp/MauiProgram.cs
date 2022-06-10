@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
-using BlazorMauiApp.Data;
+using BlazorApp.Data;
 
 namespace BlazorMauiApp;
 
