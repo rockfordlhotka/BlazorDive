@@ -1,0 +1,20 @@
+﻿@page "/"
+@inject Session session
+
+<PageTitle>Index</PageTitle>
+
+<h1>Global State</h1>
+
+<p>From Session service: @session.GetValueOrDefault("value")</p>
+<p>From static Session:  @App.StaticSession.GetValueOrDefault("value")</p>
+
+<button @onclick="ChangeSession">Change values</button>
+
+@code
+{
+  private void ChangeSession()
+  {
+    session["value"] = ((int)session["value"]) + 1;
+    App.StaticSession["value"] = ((int)App.StaticSession["value"]) + 1;
+  }
+}
