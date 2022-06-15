@@ -5,6 +5,8 @@
 @using BlazorServerAuthentication.Data
 @inject WeatherForecastService ForecastService
 
+@attribute [Authorize(Roles = "Admin")]
+
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
