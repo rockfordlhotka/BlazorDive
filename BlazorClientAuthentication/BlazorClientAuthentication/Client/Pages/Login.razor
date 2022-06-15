@@ -1,0 +1,90 @@
+﻿@page "/login"
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<AuthorizeView>
+  <Authorized>
+    <p>You are logged in.</p>
+    <span></span>
+    <button class="btn btn-primary" @onclick="HandleLogout">Logout</button>
+    <h2>Claims</h2>
+    <ul>
+      @foreach (var claim in AuthState.Result.User.Claims)
+      {
+      <li><p><span>@claim.Type</span>: <span>@claim.Value</span>: <span>@claim.ValueType</span></p></li>
+      }
+    </ul>
+
+  </Authorized>
+  <NotAuthorized>
+    <h3>Login</h3>
+
+    <p style="font-weight:bold;color:Red">@ErrorText</p>
+
+    <table>
+      <tr>
+        <td>Username</td>
+        <td><input type="text" @bind-value=@username /></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td><input type="password" @bind-value=@password /></td>
+      </tr>
+    </table>
+    <button @onclick=HandleLogin>Login</button>
+    <div>
+      <p>Credentials to try:</p>
+      <ul>
+        <li>rocky, mypassword</li>
+        <li>andrew, otherpassword</li>
+      </ul>
+    </div>
+  </NotAuthorized>
+</AuthorizeView>
+
+@code {
+  private string username = string.Empty;
+  private string? password;
+  private string? ErrorText { get; set; }
+  [CascadingParameter]
+  public Task<AuthenticationState> AuthState { get; set; }
+
+  private readonly static Dictionary<string, string> Users = new Dictionary<string, string>
+  {
+    { "rocky", "mypassword" },
+    { "andrew", "otherpassword" }
+  };
+
+  private void HandleLogin()
+  {
+    if (!string.IsNullOrWhiteSpace(username) &&
+        Users.TryGetValue(username.ToLower(), out string? pw))
+    {
+      if (pw == password)
+      {
+        var identity = new ClaimsIdentity("password");
+        identity.AddClaim(new Claim(ClaimTypes.Name, username.ToLower()));
+        identity.AddClaim(new Claim(ClaimTypes.Role, "admin"));
+        var principal = new ClaimsPrincipal(identity);
+        ((LocalAuthenticationStateProvider)AuthenticationStateProvider).SetPrincipal(principal);
+        StateHasChanged();
+      }
+      else
+      {
+        ErrorText = "Invalid credentials";
+      }
+    }
+    else
+    {
+      ErrorText = "Invalid credentials";
+    }
+  }
+
+  public void HandleLogout()
+  {
+    ((LocalAuthenticationStateProvider)AuthenticationStateProvider).SetPrincipal(new ClaimsPrincipal());
+    StateHasChanged();
+  }
+}
