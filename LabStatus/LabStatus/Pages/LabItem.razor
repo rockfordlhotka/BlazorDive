@@ -1,0 +1,33 @@
+﻿@using LabStatus.Data
+@inject LabStatusDal dal
+
+<tr>
+  <td>@itemName</td>
+  <td><input type="text" @bind-value=@ItemStatus/></td>
+</tr>
+
+@code {
+  [CascadingParameter]
+  public string User { get; set; } = string.Empty;
+  [Parameter]
+  public KeyValuePair<string, int> Item { get; set; }
+
+  private string itemName = string.Empty;
+  private int _itemStatus;
+  private int ItemStatus
+  {
+    get => _itemStatus;
+    set
+    {
+      _itemStatus = value;
+      dal.UpdateStatus(User, itemName, value);
+    }
+  }
+
+  protected override void OnParametersSet()
+  {
+    itemName = Item.Key;
+    ItemStatus = Item.Value;
+  }
+
+}

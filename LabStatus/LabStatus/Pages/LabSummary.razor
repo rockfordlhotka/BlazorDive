@@ -1,0 +1,51 @@
+﻿@using LabStatus.Data
+@inject LabStatusDal dal
+
+<h3>Lab Summary</h3>
+
+@if (Users == null || RawData == null)
+{
+  <p>Loading...</p>
+}
+else
+{
+  <button @onclick=@Refresh>Refresh</button>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th><th>Lab</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Users)
+    {
+      <tr><td>@user</td></tr>
+      @foreach (var userData in dal.GetUserStatus(user))
+      {
+        <tr>
+          <td></td>
+          <td>@userData.Key</td>
+          <td>@userData.Value</td>
+        </tr>
+      }
+    }
+    </tbody>
+  </table>
+}
+
+
+@code {
+  private Dictionary<string, List<int>> RawData;
+  private List<string> Users;
+
+  protected override void OnParametersSet()
+  {
+    Refresh();
+  }
+
+  private void Refresh()
+  {
+    RawData = dal.GetAllData();
+    Users = dal.GetUsers();
+  }
+}

@@ -1,0 +1,35 @@
+﻿@using LabStatus.Data
+@inject LabStatusDal dal
+
+<h3>Labs for @User</h3>
+
+@if (ListofLabs is null)
+{
+  <p>Loading data...</p>
+}
+else
+{
+  <CascadingValue Value=@User>
+    <table>
+      <thead><tr><th>Lab name</th><th>Your status (%)</th></tr></thead>
+      <tbody>
+        @foreach (var item in ListofLabs)
+        {
+          <LabItem Item=@item />
+        }
+      </tbody>
+    </table>
+  </CascadingValue>
+}
+
+@code {
+  [Parameter]
+  public string User { get; set; } = "<unknown>";
+
+  private Dictionary<string, int>? ListofLabs;
+
+  protected override void OnParametersSet()
+  {
+    ListofLabs = dal.GetUserStatus(User);
+  }
+}

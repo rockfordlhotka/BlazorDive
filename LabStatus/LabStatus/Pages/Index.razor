@@ -1,0 +1,30 @@
+﻿@page "/"
+
+<PageTitle>Labs</PageTitle>
+
+<h1>Lab Status</h1>
+
+Please update your status as you work through today's labs.
+
+<table>
+  <tr>
+    <td>Your name:</td>
+    <td><input type="text" @bind-value=@Username /></td>
+  </tr>
+</table>
+<hr />
+<p></p>
+
+@if (Username == "admin")
+{
+  <LabSummary />
+}
+else if (!string.IsNullOrWhiteSpace(Username))
+{
+  <LabList User=@Username />
+}
+
+@code
+{
+  private string Username { get; set; } = string.Empty;
+}
