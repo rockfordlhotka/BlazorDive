@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@inject ProtectedLocalStorage ProtectedLocalStorage
 
 <PageTitle>Labs</PageTitle>
 
@@ -21,10 +23,19 @@ Please update your status as you work through today's labs.
 }
 else if (!string.IsNullOrWhiteSpace(Username))
 {
+  @ProtectedLocalStorage.SetAsync("username", Username)
   <LabList User=@Username />
 }
 
 @code
 {
   private string Username { get; set; } = string.Empty;
+
+  protected override async Task OnParametersSetAsync()
+  {
+    var uname = await ProtectedLocalStorage.GetAsync<string>("username");
+    if (uname.Success && !string.IsNullOrWhiteSpace(uname.Value))
+      Username = uname.Value;
+    await base.OnParametersSetAsync();
+  }
 }
