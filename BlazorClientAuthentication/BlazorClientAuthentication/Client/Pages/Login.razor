@@ -67,6 +67,8 @@
         var identity = new ClaimsIdentity("password");
         identity.AddClaim(new Claim(ClaimTypes.Name, username.ToLower()));
         identity.AddClaim(new Claim(ClaimTypes.Role, "admin"));
+        identity.AddClaim(new Claim("http://schemas.lhotka.net/2023/03/identity/claims/jwt", 
+          "token-from-server-goes-here", "http://www.w3.org/2001/XMLSchema#string"));
         var principal = new ClaimsPrincipal(identity);
         ((LocalAuthenticationStateProvider)AuthenticationStateProvider).SetPrincipal(principal);
         StateHasChanged();
