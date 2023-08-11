@@ -1,52 +1,7 @@
 ﻿@page "/"
-@inject OutputLog logger;
 
 <PageTitle>Index</PageTitle>
 
 <h1>Lifecyle Events</h1>
 
-@foreach (var line in logger.Data)
-{
-  @line<br />
-}
-
-<button @onclick="ResetLog">Reset log</button>
-
-@code {
-  bool rendered;
-
-  protected override void OnInitialized()
-  {
-    base.OnInitialized();
-    logger.Log("-----------");
-    logger.Log("Initialized");
-  }
-
-  protected override void OnParametersSet()
-  {
-    base.OnParametersSet();
-    logger.Log("OnParametersSet");
-  }
-
-  protected override bool ShouldRender()
-  {
-    logger.Log("ShouldRender");
-    return base.ShouldRender();
-  }
-
-  protected override void OnAfterRender(bool firstRender)
-  {
-    base.OnAfterRender(firstRender);
-    logger.Log("OnAfterRender");
-    if (!rendered)
-    {
-      rendered = true;
-      StateHasChanged();
-    }
-  }
-
-  private void ResetLog()
-  {
-    logger.Data.Clear();
-  }
-}
+<MyComponent />
