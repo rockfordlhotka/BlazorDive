@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<AuthorizeView>
+    <Authorized>
+        Hello, @context.User.Identity?.Name!
+        <button @onclick="Logout" class="nav-link btn btn-link">Log out</button>
+    </Authorized>
+    <NotAuthorized>
+        <button @onclick="Login" class="nav-link btn btn-link">Log in</button>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code
+{
+    private void Logout()
+    {
+        ((LocalAuthenticationStateProvider)AuthenticationStateProvider).SetPrincipal(new ClaimsPrincipal());
+    }
+
+    private void Login()
+    {
+        var claims = new List<Claim>();
+        claims.Add(new Claim(ClaimTypes.Name, "rocky"));
+        claims.Add(new Claim(ClaimTypes.Role, "admin"));
+        var identity = new ClaimsIdentity(claims, "custom");
+        var principal = new ClaimsPrincipal(identity);
+        ((LocalAuthenticationStateProvider)AuthenticationStateProvider).SetPrincipal(principal);
+    }
+}
