@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.8.34302.71
+VisualStudioVersion = 17.10.34607.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServerAuthentication", "BlazorServerAuthentication\BlazorServerAuthentication.csproj", "{38CDD2E3-643F-4590-948C-B4038E5D1D3D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServerAuthentication", "BlazorServerAuthentication\BlazorServerAuthentication\BlazorServerAuthentication.csproj", "{F7AB5670-EC04-4384-AD3F-2C80BAEB6F45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServerAuthentication.Client", "BlazorServerAuthentication\BlazorServerAuthentication.Client\BlazorServerAuthentication.Client.csproj", "{80E93D2F-3446-4379-B938-B125D362C4DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +13,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{38CDD2E3-643F-4590-948C-B4038E5D1D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38CDD2E3-643F-4590-948C-B4038E5D1D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38CDD2E3-643F-4590-948C-B4038E5D1D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38CDD2E3-643F-4590-948C-B4038E5D1D3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7AB5670-EC04-4384-AD3F-2C80BAEB6F45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7AB5670-EC04-4384-AD3F-2C80BAEB6F45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7AB5670-EC04-4384-AD3F-2C80BAEB6F45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7AB5670-EC04-4384-AD3F-2C80BAEB6F45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E93D2F-3446-4379-B938-B125D362C4DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E93D2F-3446-4379-B938-B125D362C4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E93D2F-3446-4379-B938-B125D362C4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E93D2F-3446-4379-B938-B125D362C4DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E90F33CE-EEEE-4080-B25C-5D25EF32F672}
+		SolutionGuid = {1C561277-3BCF-41B5-899D-BACC321407B8}
 	EndGlobalSection
 EndGlobal

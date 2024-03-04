@@ -1,4 +1,4 @@
-﻿@using BlazorServerAuthentication.Components.Shared
+﻿@using Microsoft.AspNetCore.Components.Authorization
 @inherits LayoutComponentBase
 
 <div class="page">
@@ -8,7 +8,15 @@
 
     <main>
         <div class="top-row px-4">
-            <LoginDisplay />
+            <AuthorizeView>
+                <Authorized>
+                    Hello, @context.User.Identity.Name
+                    <a href="/logout">Logout</a>
+                </Authorized>
+                <NotAuthorized>
+                    <a href="login">Login</a>
+                </NotAuthorized>
+            </AuthorizeView>
             <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
         </div>
 

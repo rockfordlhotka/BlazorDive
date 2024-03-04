@@ -1,4 +1,7 @@
 ﻿@page "/weather"
+@using Microsoft.AspNetCore.Authorization
+@attribute [StreamRendering]
+@attribute [Authorize(Roles = "admin")]
 
 <PageTitle>Weather</PageTitle>
 
@@ -40,7 +43,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        // Simulate asynchronous loading to demonstrate a loading indicator
+        // Simulate asynchronous loading to demonstrate streaming rendering
         await Task.Delay(500);
 
         var startDate = DateOnly.FromDateTime(DateTime.Now);
